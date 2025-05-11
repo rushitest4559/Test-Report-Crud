@@ -1,4 +1,4 @@
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function fetchTestReports({ customer, partName, material, startDate, endDate, page }) {
     try {
@@ -10,7 +10,7 @@ export async function fetchTestReports({ customer, partName, material, startDate
             endDate: endDate || '',
             page: page || 1
         });
-        const res = await fetch(`/api/testreports?${params}`);
+        const res = await fetch(`${API_URL}/api/testreports?${params}`);
 
         if (!res.ok) {
             // Handle HTTP errors (e.g., 400, 500)
@@ -31,7 +31,7 @@ export async function fetchTestReports({ customer, partName, material, startDate
 export async function fetchCustomers(page = 0, limit = 5) {
     try {
         const params = new URLSearchParams({ page, limit });
-        const res = await fetch(`/api/testreports/customers?${params}`);
+        const res = await fetch(`${API_URL}/api/testreports/customers?${params}`);
 
         if (!res.ok) {
             // Improved error handling: Get error message from server if available
@@ -63,7 +63,7 @@ export async function fetchCustomers(page = 0, limit = 5) {
 export async function fetchParts(customer, page = 0, limit = 5) {
     try {
         const params = new URLSearchParams({ customer, page, limit });
-        const res = await fetch(`/api/testreports/parts?${params}`);
+        const res = await fetch(`${API_URL}/api/testreports/parts?${params}`);
 
         if (!res.ok) {
             // Improved error handling: Get error message from server if available
@@ -94,7 +94,7 @@ export async function fetchParts(customer, page = 0, limit = 5) {
 export async function fetchReportsByParts(customer, partName, material, page = 0, limit = 5) {
     try {
         const params = new URLSearchParams({ customer, partName, material, page, limit });
-        const res = await fetch(`/api/testreports/reports?${params}`);
+        const res = await fetch(`${API_URL}/api/testreports/reports?${params}`);
 
         if (!res.ok) {
             // Improved error handling: Get error message from server if available
@@ -127,7 +127,7 @@ export async function fetchParameters(customer, partName, material) {
   try {
     console.log(`Calling fetchParameters with customer: ${customer}, partName: ${partName}, material: ${material}`);
     const params = new URLSearchParams({ customer, partName, material });
-    const res = await fetch(`/api/testreports/parameters?${params}`);
+    const res = await fetch(`${API_URL}/api/testreports/parameters?${params}`);
 
     if (!res.ok) {
       let errorMessage = `Failed to fetch parameters: ${res.status}`;
@@ -155,7 +155,7 @@ export async function fetchParameters(customer, partName, material) {
 export async function createTestReport(data) {
   try {
     console.log("Calling createTestReport with data:", data);
-    const res = await fetch('/api/testreports', {
+    const res = await fetch(`${API_URL}/api/testreports`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -187,7 +187,7 @@ export async function createTestReport(data) {
 export async function editTestReport(id, data) {
   try {
     console.log(`Calling editTestReport with id: ${id} and data:`, data);
-    const res = await fetch(`/api/testreports/${id}`, {
+    const res = await fetch(`${API_URL}/api/testreports/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -219,7 +219,7 @@ export async function editTestReport(id, data) {
 export async function getReportById(id) {
   try {
     console.log(`Calling getReportById with id: ${id}`);
-    const res = await fetch(`/api/testreports/report/${id}`);
+    const res = await fetch(`${API_URL}/api/testreports/report/${id}`);
 
     if (!res.ok) {
       let errorMessage = `Failed to get report: ${res.status}`;
@@ -246,7 +246,7 @@ export async function getReportById(id) {
 
 
 export async function fetchCustomerSuggestions(query) {
-  const res = await fetch(`/api/testreports/suggestions/customer?customer=${encodeURIComponent(query)}`);
+  const res = await fetch(`${API_URL}/api/testreports/suggestions/customer?customer=${encodeURIComponent(query)}`);
   const data = await res.json();
   // Remove duplicates and return array of { customer }
   const seen = new Set();
@@ -258,7 +258,7 @@ export async function fetchCustomerSuggestions(query) {
 }
 
 export async function fetchPartNameSuggestions(query) {
-  const res = await fetch(`/api/testreports/suggestions/part-name?partName=${encodeURIComponent(query)}`);
+  const res = await fetch(`${API_URL}/api/testreports/suggestions/part-name?partName=${encodeURIComponent(query)}`);
   const data = await res.json();
   const seen = new Set();
   return data.filter(r => {
@@ -269,7 +269,7 @@ export async function fetchPartNameSuggestions(query) {
 }
 
 export async function fetchMaterialSuggestions(query) {
-  const res = await fetch(`/api/testreports/suggestions/material?material=${encodeURIComponent(query)}`);
+  const res = await fetch(`${API_URL}/api/testreports/suggestions/material?material=${encodeURIComponent(query)}`);
   const data = await res.json();
   const seen = new Set();
   return data.filter(r => {
