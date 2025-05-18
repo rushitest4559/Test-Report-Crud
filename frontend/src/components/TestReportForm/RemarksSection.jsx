@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 export default function RemarksSection({ form, setForm }) {
+  console.log(form)
   const [generating, setGenerating] = useState(false);
   const [status, setStatus] = useState(null);
 
@@ -11,7 +12,7 @@ export default function RemarksSection({ form, setForm }) {
     setStatus(null);
     try {
       const prompt = `Generate remarks based on the following data:
-${JSON.stringify(form)}. Indicate if the data generally meets specifications and provide reasons for any deviations. Give concise answer (accepted or not), if not accepted then give reason in one line.`;
+${JSON.stringify({ ...form, remarks: "" })}. Indicate if the data generally meets specifications and provide reasons for any deviations. Give concise answer (accepted or not), if not accepted then give reason in one line.`;
 
       const response = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,

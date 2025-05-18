@@ -23,49 +23,52 @@ export default function ParametersSection({ form, setForm }) {
   return (
     <section className="parameters-section">
       <h3>Parameters</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Specified</th>
-            <th>Actual</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {(form.parameters || []).map((param, idx) => (
-            <tr key={idx}>
-              <td>
-                <input
-                  value={param.name}
-                  onChange={e => handleChange(idx, "name", e.target.value)}
-                  required
-                />
-              </td>
-              <td>
-                <input
-                  value={param.specified}
-                  onChange={e => handleChange(idx, "specified", e.target.value)}
-                />
-              </td>
-              <td>
-                <input
-                  value={param.actual}
-                  onChange={e => handleChange(idx, "actual", e.target.value)}
-                />
-              </td>
-              <td>
-                <button type="button" onClick={() => handleDelete(idx)}>
-                  Delete
-                </button>
-              </td>
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Specified</th>
+              <th>Actual</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {(form.parameters || []).map((param, idx) => (
+              <tr key={idx}>
+                <td>
+                  <input
+                    value={param.name}
+                    onChange={e => handleChange(idx, "name", e.target.value)}
+                    required
+                  />
+                </td>
+                <td>
+                  <input
+                    value={param.specified}
+                    onChange={e => handleChange(idx, "specified", e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    value={param.actual}
+                    onChange={e => handleChange(idx, "actual", e.target.value)}
+                  />
+                </td>
+                <td>
+                  <button type="button" onClick={() => handleDelete(idx)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <button type="button" onClick={handleAdd}>
         + Add Parameter
       </button>
     </section>
+
   );
 }

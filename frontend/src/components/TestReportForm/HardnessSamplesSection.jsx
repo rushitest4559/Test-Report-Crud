@@ -53,12 +53,14 @@ export default function HardnessSamplesSection({ form, setForm }) {
             <tr key={idx}>
               <td>
                 <input
+                readOnly
                   value={s.sampleNo}
                   onChange={e => handleChange(idx, "sampleNo", e.target.value)}
                 />
               </td>
               <td>
                 <input
+                type="number"
                   value={s.surfaceHardness}
                   onChange={e => handleChange(idx, "surfaceHardness", e.target.value)}
                 />

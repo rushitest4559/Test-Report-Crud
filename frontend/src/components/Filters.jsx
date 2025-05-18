@@ -8,19 +8,19 @@ const Filters = ({ filters, onChange }) => {
     <div className="filters">
       <input
         name='customer'
-        placeholder='Customer'
+        placeholder='Search Customer'
         value={filters.customer}
         onChange={handleInput}
       />
       <input
         name='partName'
-        placeholder='Part Name'
+        placeholder='Search Part Name'
         value={filters.partName}
         onChange={handleInput}
       />
       <input
         name='material'
-        placeholder='Material'
+        placeholder='Search Material'
         value={filters.material}
         onChange={handleInput}
       />

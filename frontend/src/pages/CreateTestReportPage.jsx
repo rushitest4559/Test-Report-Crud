@@ -73,7 +73,6 @@ export default function CreateTestReportPage() {
 
   return (
     <div>
-      <h2>Create Test Report</h2>
       {loading ? (
         <div>Loading autofill data...</div>
       ) : (

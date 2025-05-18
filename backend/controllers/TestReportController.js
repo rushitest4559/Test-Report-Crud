@@ -382,6 +382,7 @@ export const getReportsByParts = async (req, res) => {
 
         // Find paginated test reports matching the criteria
         const reports = await TestReport.find({ customer, partName, material })
+            .sort({ createdAt: -1 })
             .skip(page * limit)
             .limit(limit);
 

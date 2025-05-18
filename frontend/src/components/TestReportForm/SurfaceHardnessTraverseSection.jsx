@@ -43,32 +43,35 @@ export default function SurfaceHardnessTraverseSection({ form, setForm, caseDept
 
   return (
     <section className="surface-hardness-section">
-      <h3>Surface Hardness Traverse</h3>
-      <table>
-        <thead>
-          <tr>
-            {columns.map(col => (
-              <th key={col}>{col === "Distance (mm)" ? col : `Hardness HV1 (${col})`}</th>
+  <h3>Surface Hardness Traverse</h3>
+  <div className="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          {columns.map(col => (
+            <th key={col}>{col === "Distance (mm)" ? col : `Hardness HV1 (${col})`}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {traverse.map((row, rowIdx) => (
+          <tr key={rowIdx}>
+            <td>{row.distance.toFixed(2)}</td>
+            {caseDepthNames.map(colName => (
+              <td key={colName}>
+                <input
+                  type="number"
+                  value={row.hardness[colName] ?? ""}
+                  onChange={e => handleChange(rowIdx, colName, e.target.value)}
+                />
+              </td>
             ))}
           </tr>
-        </thead>
-        <tbody>
-          {traverse.map((row, rowIdx) => (
-            <tr key={rowIdx}>
-              <td>{row.distance.toFixed(2)}</td>
-              {caseDepthNames.map(colName => (
-                <td key={colName}>
-                  <input
-                    type="number"
-                    value={row.hardness[colName] ?? ""}
-                    onChange={e => handleChange(rowIdx, colName, e.target.value)}
-                  />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </section>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
   );
 }
