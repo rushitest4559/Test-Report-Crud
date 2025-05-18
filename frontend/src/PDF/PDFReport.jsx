@@ -5,8 +5,9 @@ import html2pdf from "html2pdf.js";
 import PDFContent from "./PDFContent";
 
 import '../styles/pdf.css'
-
+const API_URL = import.meta.env.VITE_API_URL;
 const ReportPDF = ({ reportId }) => {
+    
     const targetRef = useRef();
     const [loadingStep, setLoadingStep] = useState(""); // "", "generating", "uploading", "sharing"
     const [fileIoLink, setFileIoLink] = useState(null);
@@ -58,7 +59,7 @@ const ReportPDF = ({ reportId }) => {
             const formData = new FormData();
             formData.append("file", pdfBlob, `${initialData.testCertNo}.pdf`);
 
-            const res = await fetch("/api/upload", {
+            const res = await fetch(`${API_URL}/api/upload`, {
                 method: "POST",
                 body: formData,
             });
